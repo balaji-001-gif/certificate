@@ -1,0 +1,148 @@
+{% extends "templates/web.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block head_include %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:        #0f0f0f;
+  --gold:       #b8962e;
+  --gold-lt:    #e8d08a;
+  --cream:      #faf8f3;
+  --surface:    #ffffff;
+  --border:     #ddd5b8;
+  --muted:      #6b6455;
+  --valid-bg:   #eaf5ee;
+  --valid-fg:   #1e6641;
+  --warn-bg:    #fff8e1;
+  --warn-fg:    #856404;
+  --radius:     3px;
+  --shadow:     0 2px 40px rgba(0,0,0,.07);
+}
+
+body { background: var(--cream); font-family: 'DM Sans', sans-serif; color: var(--ink); }
+.v-wrap { max-width: 800px; margin: 0 auto; padding: 60px 20px; }
+.v-header { text-align: center; margin-bottom: 40px; }
+.v-logo { max-width: 200px; margin-bottom: 20px; }
+
+.cert-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+.card-header { background: var(--ink); color: #fff; padding: 30px 40px; display: flex; justify-content: space-between; align-items: flex-start; }
+.ch-main h1 { font-family: 'Cormorant Garamond', serif; font-size: 2rem; margin-bottom: 8px; }
+.type-badge { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold-lt); border: 1px solid var(--gold); padding: 2px 12px; border-radius: 20px; }
+.card-body { padding: 40px; }
+
+.status-banner { display: flex; align-items: center; gap: 12px; padding: 15px 25px; border-left: 4px solid; margin-bottom: 30px; }
+.status-banner.valid { background: var(--valid-bg); color: var(--valid-fg); border-color: var(--valid-fg); }
+.status-banner.warn  { background: var(--warn-bg); color: var(--warn-fg); border-color: var(--warn-fg); }
+
+.dg { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 30px; }
+.di { padding: 15px 20px; border-bottom: 1px solid var(--border); border-right: 1px solid var(--border); }
+.di:nth-child(even) { border-right: none; }
+.di:last-child { border-bottom: none; border-right: none; }
+.di:nth-last-child(2):nth-child(odd) { border-bottom: none; }
+
+.di .lbl { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 4px; }
+.di .val { font-size: 0.95rem; font-weight: 500; }
+.di .val.big { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 600; }
+
+.cert-desc { border-top: 1px solid var(--border); padding-top: 25px; }
+.cert-desc h4 { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 10px; }
+.cert-desc .content { font-size: 0.9rem; line-height: 1.7; color: var(--muted); }
+
+.v-footer { text-align: center; margin-top: 40px; font-size: 0.75rem; color: var(--muted); }
+
+@media (max-width: 600px) {
+    .card-header { flex-direction: column; gap: 15px; }
+    .dg { grid-template-columns: 1fr; }
+    .di { border-right: none !important; }
+}
+</style>
+{% endblock %}
+
+{% block page_content %}
+<div class="v-wrap">
+    <div class="v-header">
+        <img src="/assets/certificate/images/seria_logo.png" alt="Seria Logo" class="v-logo">
+        <h1>Certificate Verification</h1>
+    </div>
+
+    {% if error %}
+    <div class="cert-card" style="padding: 60px 40px; text-align: center;">
+        <h2 style="color: #d32f2f;">Verification Error</h2>
+        <p>{{ error }}</p>
+        <div style="margin-top: 30px;">
+            <a href="/" class="btn btn-default btn-sm">Return Home</a>
+        </div>
+    </div>
+    {% else %}
+    
+    {% if warning %}
+    <div class="status-banner warn">
+        <span>⚠️</span>
+        <div>
+            <div style="font-weight: 600;">Pending Verification</div>
+            <div style="font-size: 0.75rem; opacity: 0.8;">{{ warning }}</div>
+        </div>
+    </div>
+    {% else %}
+    <div class="status-banner valid">
+        <span>✓</span>
+        <div>
+            <div style="font-weight: 600;">Authentic Record</div>
+            <div style="font-size: 0.75rem; opacity: 0.8;">Verified against official database · {{ doc.name }}</div>
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="cert-card">
+        <div class="card-header">
+            <div class="ch-main">
+                <h1>{{ doc.certificate_title }}</h1>
+                <span class="type-badge">{{ doc.certificate_type }}</span>
+            </div>
+            <div style="font-size: 0.7rem; opacity: 0.6;">REF: {{ doc.name }}</div>
+        </div>
+
+        <div class="card-body">
+            <div class="dg">
+                <div class="di" style="grid-column: span 2;">
+                    <div class="lbl">Awarded To</div>
+                    <div class="val big">{{ doc.recipient_name or doc.recipient }}</div>
+                </div>
+                <div class="di">
+                    <div class="lbl">Issuing Authority</div>
+                    <div class="val">{{ doc.issuing_authority }}</div>
+                </div>
+                <div class="di">
+                    <div class="lbl">Issue Date</div>
+                    <div class="val">{{ f_issue_date }}</div>
+                </div>
+                {% if f_from_date %}
+                <div class="di">
+                    <div class="lbl">Duration</div>
+                    <div class="val">{{ f_from_date }} – {{ f_to_date }}</div>
+                </div>
+                {% endif %}
+                <div class="di">
+                    <div class="lbl">Status</div>
+                    <div class="val" style="color: var(--gold); font-weight: 600;">{{ doc.status }}</div>
+                </div>
+            </div>
+
+            {% if doc.description %}
+            <div class="cert-desc">
+                <h4>Description</h4>
+                <div class="content">{{ doc.description }}</div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+
+    <div class="v-footer">
+        This is an official record served directly from <strong>hlm.bizaxl.org</strong>.
+    </div>
+</div>
+{% endblock %}
