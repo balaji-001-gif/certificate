@@ -1,0 +1,12 @@
+{
+  "name": "certificate",
+  "version": "1.0.0",
+  "description": "Certificate Management with QR Code Verification",
+  "main": "index.js",
+  "author": "Your Organization",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "esbuild": "^0.19.0"
+  }
+}

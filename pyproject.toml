@@ -1,0 +1,23 @@
+[project]
+name = "certificate"
+authors = [
+    { name = "Seria Applied Research Pvt Ltd.", email = "admin@yourorg.com" }
+]
+description = "Certificate Management with QR Code Verification for ERPNext"
+requires-python = ">=3.10"
+dynamic = ["version"]
+dependencies = [
+    "qrcode[pil]",
+]
+
+[build-system]
+requires = ["flit_core >=3.4,<4"]
+build-backend = "flit_core.buildapi"
+
+[tool.bench]
+app_name = "certificate"
+app_title = "Certificate Manager"
+app_publisher = "Seria Applied Research Pvt Ltd."
+app_description = "Issue, track and verify certificates with QR code verification"
+app_license = "mit"
+app_email = "info@seriaappliedresearch.com"

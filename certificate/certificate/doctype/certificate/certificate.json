@@ -1,0 +1,53 @@
+{
+  "autoname": "naming_series:",
+  "creation": "2024-01-01 00:00:00.000000",
+  "doctype": "DocType",
+  "engine": "InnoDB",
+  "field_order": [
+    "naming_series","certificate_title","certificate_type",
+    "column_break_1","recipient_type","recipient","recipient_name",
+    "column_break_2","from_date","to_date","hours","issuing_authority",
+    "section_break_3","issue_date","expiry_date","valid_until",
+    "column_break_4","status","qr_code",
+    "section_break_5","description","certificate_file","remarks"
+  ],
+  "fields": [
+    {"fieldname":"naming_series","fieldtype":"Select","label":"Naming Series","options":"CERT-.YYYY.-.#####","reqd":1},
+    {"fieldname":"certificate_title","fieldtype":"Data","label":"Certificate Title","reqd":1},
+    {"fieldname":"certificate_type","fieldtype":"Select","label":"Certificate Type","options":"Training\nInternship\nProduct\nCompliance\nAchievement\nQualification\nOther","reqd":1},
+    {"fieldname":"column_break_1","fieldtype":"Column Break"},
+    {"fieldname":"recipient_type","fieldtype":"Select","label":"Recipient Type","options":"Student\nCustomer\nEmployee\nSupplier\nMember\nOther","reqd":1},
+    {"fieldname":"recipient","fieldtype":"Dynamic Link","label":"Recipient","options":"recipient_type","reqd":1},
+    {"fieldname":"recipient_name","fieldtype":"Data","label":"Recipient Name","read_only":1,"fetch_from":"recipient.full_name","fetch_if_empty":1},
+    {"fieldname":"column_break_2","fieldtype":"Column Break"},
+    {"fieldname":"from_date","fieldtype":"Date","label":"From Date"},
+    {"fieldname":"to_date","fieldtype":"Date","label":"To Date"},
+    {"fieldname":"hours","fieldtype":"Float","label":"Total Hours"},
+    {"fieldname":"issuing_authority","fieldtype":"Data","label":"Issuing Authority","reqd":1},
+    {"fieldname":"section_break_3","fieldtype":"Section Break","label":"Validity"},
+    {"fieldname":"issue_date","fieldtype":"Date","label":"Issue Date","reqd":1,"default":"Today"},
+    {"fieldname":"expiry_date","fieldtype":"Date","label":"Expiry Date"},
+    {"fieldname":"valid_until","fieldtype":"Date","label":"Valid Until"},
+    {"fieldname":"column_break_4","fieldtype":"Column Break"},
+    {"fieldname":"status","fieldtype":"Select","label":"Status","options":"Draft\nActive\nExpired\nRevoked","reqd":1,"default":"Draft"},
+    {"fieldname":"qr_code","fieldtype":"Attach Image","label":"QR Code","read_only":1},
+    {"fieldname":"section_break_5","fieldtype":"Section Break","label":"Details"},
+    {"fieldname":"description","fieldtype":"Text Editor","label":"Description"},
+    {"fieldname":"certificate_file","fieldtype":"Attach","label":"Certificate File"},
+    {"fieldname":"remarks","fieldtype":"Small Text","label":"Remarks"}
+  ],
+  "is_submittable": 1,
+  "module": "Certificate",
+  "name": "Certificate",
+  "naming_rule": "By \"Naming Series\" field",
+  "owner": "Administrator",
+  "permissions": [
+    {"create":1,"delete":1,"email":1,"export":1,"print":1,"read":1,"report":1,"role":"System Manager","share":1,"submit":1,"cancel":1,"write":1},
+    {"create":1,"read":1,"role":"Administrator","submit":1,"cancel":1,"write":1}
+  ],
+  "quick_entry": 1,
+  "sort_field": "modified",
+  "sort_order": "DESC",
+  "track_changes": 1,
+  "title_field": "certificate_title"
+}
