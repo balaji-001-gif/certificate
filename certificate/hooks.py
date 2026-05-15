@@ -30,7 +30,12 @@ fixtures = [
         "doctype": "Print Format",
         "filters": [["name", "in", ["Certificate"]]]
     },
-]
 
+app_include_js = []
+
+doctype_js = {
+    "Certificate": "public/js/certificate.js"
+}
+]
 # Website
 # Default discovery handles /verify-certificate
