@@ -20,7 +20,7 @@ frappe.ui.form.on("Certificate", {
             frm.add_custom_button(__("Regenerate QR Code"), () => {
                 frappe.confirm(__("Regenerate the QR code for this certificate?"), () => {
                     frappe.call({
-                        method: "certificate_manager.certificate.doctype.certificate.certificate.regenerate_qr",
+                        method: "certificate.certificate.doctype.certificate.certificate.regenerate_qr",
                         args: { docname: frm.doc.name },
                         callback(r) {
                             if (!r.exc) {
@@ -45,9 +45,9 @@ frappe.ui.form.on("Certificate", {
             Employee: "employee_name",
             Customer: "customer_name",
             Supplier: "supplier_name",
-            Student: "student_name",
+            Student: "full_name",
         };
-        const field = name_fields[frm.doc.recipient_type];
+        const field = name_fields[frm.doc.recipient_type] || "name";
         if (field) {
             frappe.db.get_value(frm.doc.recipient_type, frm.doc.recipient, field).then(r => {
                 if (r.message && r.message[field]) {
