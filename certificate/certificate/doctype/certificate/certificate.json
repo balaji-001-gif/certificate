@@ -37,7 +37,7 @@
     {"fieldname":"remarks","fieldtype":"Small Text","label":"Remarks"}
   ],
   "is_submittable": 1,
-  "module": "Certificate",
+  "module": "certificate",
   "name": "Certificate",
   "naming_rule": "By \"Naming Series\" field",
   "owner": "Administrator",
