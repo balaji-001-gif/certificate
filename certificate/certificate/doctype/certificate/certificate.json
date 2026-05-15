@@ -35,6 +35,7 @@
     {"fieldname":"description","fieldtype":"Text Editor","label":"Description"},
     {"fieldname":"certificate_file","fieldtype":"Attach","label":"Certificate File"},
     {"fieldname":"remarks","fieldtype":"Small Text","label":"Remarks"}
+    {"fieldname": "certificate", "fieldtype": "Data", "hidden": 1}
   ],
   "is_submittable": 1,
   "module": "certificate",
