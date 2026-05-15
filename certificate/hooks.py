@@ -33,6 +33,4 @@ fixtures = [
 ]
 
 # Website
-website_route_rules = [
-    {"from_route": "/verify-certificate", "to_route": "verify-certificate"},
-]
+# Default discovery handles /verify-certificate
