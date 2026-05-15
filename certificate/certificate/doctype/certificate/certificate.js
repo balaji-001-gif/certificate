@@ -42,7 +42,7 @@ frappe.ui.form.on("Certificate", {
             Employee: "employee_name",
             Customer: "customer_name",
             Supplier: "supplier_name",
-            Student:  "student_name",
+            Student:  "first_name",
             Member:   "member_name",
             Other:    "name"
         };
