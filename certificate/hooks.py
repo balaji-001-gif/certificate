@@ -11,8 +11,8 @@ required_apps = ["frappe", "erpnext"]
 # DocType class controller
 doc_events = {
     "Certificate": {
-        "on_submit": "certificate.certificate.doctype.certificate.certificate.on_submit",
-        "on_cancel": "certificate.certificate.doctype.certificate.certificate.on_cancel",
+        "on_submit": "certificate.doctype.certificate.certificate.on_submit",
+        "on_cancel": "certificate.doctype.certificate.certificate.on_cancel",
     }
 }
 

@@ -20,7 +20,7 @@ frappe.ui.form.on("Certificate", {
             frm.add_custom_button(__("Regenerate QR Code"), () => {
                 frappe.confirm(__("Regenerate the QR code for this certificate?"), () => {
                     frappe.call({
-                        method: "certificate.certificate.doctype.certificate.certificate.regenerate_qr",
+                        method: "certificate.doctype.certificate.certificate.regenerate_qr",
                         args: { docname: frm.doc.name },
                         callback(r) {
                             if (!r.exc) {
