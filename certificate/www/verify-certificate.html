@@ -287,7 +287,7 @@ body {
             <div class="cert-details-list">
                 <div class="detail-row">
                     <span class="detail-label">Certification:</span>
-                    <span class="detail-value">{{ c.certificate_title }}</span>
+                    <span class="detail-value">{{ c.certificate_type }}</span>
                 </div>
                 <div class="detail-row">
                     <span class="detail-label">Recipient Type:</span>
@@ -318,7 +318,7 @@ body {
             </div>
             {% endif %}
 
-            <div class="cert-title-large">{{ c.certificate_title }}</div>
+            <div class="cert-title-large">{{ c.certificate_type }}</div>
             <div class="success-message">
                 This document confirms that <strong>{{ c.recipient_name }}</strong> has successfully completed all requirements for the <strong>{{ c.certificate_title }}</strong> program at <strong>{{ "Seria Applied Research Pvt Ltd." }}</strong>.
             </div>
@@ -327,7 +327,7 @@ body {
                 {% if c.description %}
                     {{ c.description | striptags }}
                 {% else %}
-                    Seria Applied Research Pvt Ltd. recognizes the exceptional technical skills and dedication demonstrated by the candidate. This certification serves as a testament to their professional competence in the field of {{ c.certificate_title }}.
+                    Seria Applied Research Pvt Ltd. recognizes the exceptional technical skills and dedication demonstrated by the candidate. This certification serves as a testament to their professional competence in the field of {{ c.certificate_type }}.
                 {% endif %}
             </div>
 
